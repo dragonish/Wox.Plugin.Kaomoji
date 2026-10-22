@@ -1,11 +1,7 @@
-> For developer
-
-    Please run `make init` to initialize the project.
-
-# {{.Name}}
+# Kaomoji
 
 # Install
 
 ```
-wpm install {{.Name}}
+wpm install Kaomoji
 ```

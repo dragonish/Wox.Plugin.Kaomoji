@@ -1,6 +1,6 @@
 .PHONY: help init check-init check-dev-deps install reinstall clean lint format build test package dev
 
-PLUGIN_NAME := {{.Name}}
+PLUGIN_NAME := kaomoji
 
 DIST_DIR := dist
 SRC_DIR := src
