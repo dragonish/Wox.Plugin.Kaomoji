@@ -1,4 +1,4 @@
-.PHONY: help init check-init check-dev-deps install reinstall clean lint format build test package dev
+.PHONY: help init check-init check-dev-deps install reinstall data clean lint format build test package dev
 
 PLUGIN_NAME := kaomoji
 
@@ -18,6 +18,7 @@ help:
 	@echo "  make init     - Initialize template values interactively"
 	@echo "  make install  - Install project dependencies"
 	@echo "  make reinstall - Reinstall project dependencies from scratch"
+	@echo "  make data     - Generate data"
 	@echo "  make clean    - Clean build directory"
 	@echo "  make build    - Build project"
 	@echo "  make test     - Run tests"
@@ -45,6 +46,9 @@ else
 endif
 	pnpm install
 
+data:
+	node scripts/generate-data.mjs
+
 clean:
 ifeq ($(OS),Windows_NT)
 	$(POWERSHELL) "if (Test-Path '$(DIST_DIR)') { Remove-Item -Recurse -Force '$(DIST_DIR)' }"
@@ -61,7 +65,7 @@ lint: check-init check-dev-deps
 format: check-init check-dev-deps
 	$(PRETTIER) --write "$(SRC_DIR)/**/*" "**/*.json" README.md
 
-build: check-init check-dev-deps lint format
+build: check-init check-dev-deps data lint format
 ifeq ($(OS),Windows_NT)
 	$(POWERSHELL) "if (Test-Path '$(DIST_DIR)') { Remove-Item -Recurse -Force '$(DIST_DIR)' }"
 else

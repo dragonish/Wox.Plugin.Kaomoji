@@ -1,20 +1,81 @@
 {
-    "Id": "9f479da0-2c9f-412c-80f1-02f2bdc10263",
-    "TriggerKeywords": [
-        "kao"
-    ],
-    "Name": "Kaomoji",
-    "Description": "Search and copy kaomoji.",
-    "Author": "dragonish",
-    "Version": "0.0.1",
-    "MinWoxVersion": "2.0.0",
-    "Runtime": "nodejs",
-    "Website": "https://github.com/dragonish/Wox.Plugin.Kaomoji",
-    "Entry": "index.js",
-    "Icon": "relative:images/app.svg",
-    "SupportedOS": [
-        "Windows",
-        "Linux",
-        "Darwin"
-    ]
+  "Id": "9f479da0-2c9f-412c-80f1-02f2bdc10263",
+  "TriggerKeywords": ["kao"],
+  "Name": "i18n:plugin_name",
+  "Description": "i18n:plugin_desc",
+  "Author": "dragonish",
+  "Version": "0.0.1",
+  "MinWoxVersion": "2.4.5",
+  "Runtime": "nodejs",
+  "Website": "https://github.com/dragonish/Wox.Plugin.Kaomoji",
+  "Entry": "index.js",
+  "Icon": "relative:images/app.svg",
+  "SupportedOS": ["Windows", "Linux", "Darwin"],
+  "I18n": {
+    "en_US": {
+      "plugin_name": "Kaomoji",
+      "plugin_desc": "Search and copy kaomoji.",
+      "action_copy": "Copy kaomoji",
+      "action_copy_image": "Copy as image",
+      "action_save": "Save text file to desktop",
+      "action_save_image": "Save PNG to desktop",
+      "error_image_failed": "Failed to build image: %s",
+      "error_save_failed": "Failed to save file: %s",
+      "notify_copied": "Kaomoji copied to clipboard",
+      "notify_copied_image": "Image copied to clipboard",
+      "notify_saved": "Saved to %s",
+      "notify_saved_image": "Image saved to %s",
+      "preview_characters": "%s characters",
+      "preview_label_category": "Category",
+      "preview_label_source": "Source",
+      "preview_label_tag": "Tag",
+      "preview_label_description": "Description"
+    },
+    "ja_JP": {
+      "plugin_name": "顔文字",
+      "plugin_desc": "顔文字を検索してコピーします。",
+      "action_copy": "顔文字をコピー",
+      "action_copy_image": "画像としてコピー",
+      "action_save": "テキストファイルをデスクトップに保存",
+      "action_save_image": "PNG をデスクトップに保存",
+      "error_image_failed": "画像の生成に失敗しました：%s",
+      "error_save_failed": "ファイルの保存に失敗しました：%s",
+      "notify_copied": "顔文字をクリップボードにコピーしました",
+      "notify_copied_image": "画像をクリップボードにコピーしました",
+      "notify_saved": "%s に保存しました",
+      "notify_saved_image": "画像を %s に保存しました",
+      "preview_characters": "%s 文字",
+      "preview_label_category": "カテゴリ",
+      "preview_label_source": "ソース",
+      "preview_label_tag": "タグ",
+      "preview_label_description": "説明"
+    },
+    "zh_CN": {
+      "plugin_name": "颜文字",
+      "plugin_desc": "搜索并复制颜文字。",
+      "action_copy": "复制颜文字",
+      "action_copy_image": "复制为图片",
+      "action_save": "保存文本文件到桌面",
+      "action_save_image": "保存 PNG 到桌面",
+      "error_image_failed": "生成图片失败：%s",
+      "error_save_failed": "保存文件失败：%s",
+      "notify_copied": "颜文字已复制到剪贴板",
+      "notify_copied_image": "图片已复制到剪贴板",
+      "notify_saved": "已保存到 %s",
+      "notify_saved_image": "图片已保存到 %s",
+      "preview_characters": "%s 字符",
+      "preview_label_category": "分类",
+      "preview_label_source": "来源",
+      "preview_label_tag": "标签",
+      "preview_label_description": "描述"
+    }
+  },
+  "Features": [
+    {
+      "Name": "mru",
+      "Params": {
+        "HashBy": "identityKey"
+      }
+    }
+  ]
 }
