@@ -6,7 +6,7 @@
   "Name": "i18n:plugin_name",
   "Description": "i18n:plugin_desc",
   "Author": "dragonish",
-  "Version": "0.0.8",
+  "Version": "1.0.0",
   "MinWoxVersion": "2.4.5",
   "Runtime": "nodejs",
   "Website": "https://github.com/dragonish/Wox.Plugin.Kaomoji",
