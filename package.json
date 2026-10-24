@@ -1,5 +1,5 @@
 {
-  "version": "0.0.7",
+  "version": "0.0.8",
   "devDependencies": {
     "@babel/cli": "^7.24.7",
     "@babel/core": "^7.24.7",
@@ -21,7 +21,7 @@
     "typescript-eslint": "^8.45.0"
   },
   "dependencies": {
-    "@wox-launcher/wox-plugin": "0.0.141",
+    "@wox-launcher/wox-plugin": "0.0.144",
     "opentype.js": "^0.4.11",
     "pureimage": "^0.4.20"
   }
