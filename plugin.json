@@ -1,8 +1,6 @@
 {
   "Id": "9f479da0-2c9f-412c-80f1-02f2bdc10263",
-  "TriggerKeywords": [
-    "kao"
-  ],
+  "TriggerKeywords": ["kao"],
   "Name": "i18n:plugin_name",
   "Description": "i18n:plugin_desc",
   "Author": "dragonish",
@@ -12,11 +10,7 @@
   "Website": "https://github.com/dragonish/Wox.Plugin.Kaomoji",
   "Entry": "index.js",
   "Icon": "relative:images/app.svg",
-  "SupportedOS": [
-    "Windows",
-    "Linux",
-    "Darwin"
-  ],
+  "SupportedOS": ["Windows", "Linux", "Darwin"],
   "I18n": {
     "en_US": {
       "plugin_name": "Kaomoji",
