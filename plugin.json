@@ -5,7 +5,7 @@
   "Description": "i18n:plugin_desc",
   "Author": "dragonish",
   "Version": "1.0.0",
-  "MinWoxVersion": "2.4.5",
+  "MinWoxVersion": "2.4.8",
   "Runtime": "nodejs",
   "Website": "https://github.com/dragonish/Wox.Plugin.Kaomoji",
   "Entry": "index.js",
@@ -19,6 +19,11 @@
       "action_copy_image": "Copy as image",
       "action_save": "Save text file to desktop",
       "action_save_image": "Save PNG to desktop",
+      "ai_failed": "AI matching failed",
+      "ai_group": "AI",
+      "ai_matching": "AI matching…",
+      "ai_matching_subtitle": "Asking Wox AI for more kaomoji",
+      "ai_no_result": "No AI matches found",
       "error_image_failed": "Failed to build image: %s",
       "error_save_failed": "Failed to save file: %s",
       "notify_copied": "Kaomoji copied to clipboard",
@@ -29,7 +34,11 @@
       "preview_label_category": "Category",
       "preview_label_source": "Source",
       "preview_label_tag": "Tag",
-      "preview_label_description": "Description"
+      "preview_label_description": "Description",
+      "setting_ai_label": "AI matching",
+      "setting_ai_model_label": "AI model",
+      "setting_ai_model_tooltip": "Model used for kaomoji matching. Configure AI providers in Wox settings.",
+      "setting_ai_tooltip": "When enabled, Wox AI suggests additional kaomoji for searches of 2 or more characters. Choose the AI model used for matching below."
     },
     "ja_JP": {
       "plugin_name": "顔文字",
@@ -38,6 +47,11 @@
       "action_copy_image": "画像としてコピー",
       "action_save": "テキストファイルをデスクトップに保存",
       "action_save_image": "PNG をデスクトップに保存",
+      "ai_failed": "AI マッチングに失敗しました",
+      "ai_group": "AI",
+      "ai_matching": "AI マッチング中…",
+      "ai_matching_subtitle": "Wox AI に追加の顔文字を問い合わせています",
+      "ai_no_result": "AI による一致は見つかりませんでした",
       "error_image_failed": "画像の生成に失敗しました：%s",
       "error_save_failed": "ファイルの保存に失敗しました：%s",
       "notify_copied": "顔文字をクリップボードにコピーしました",
@@ -48,7 +62,11 @@
       "preview_label_category": "カテゴリ",
       "preview_label_source": "ソース",
       "preview_label_tag": "タグ",
-      "preview_label_description": "説明"
+      "preview_label_description": "説明",
+      "setting_ai_label": "AI マッチング",
+      "setting_ai_model_label": "AI モデル",
+      "setting_ai_model_tooltip": "顔文字の照合に使うモデルです。AI プロバイダーは Wox の設定で構成します。",
+      "setting_ai_tooltip": "有効にすると、2 文字以上の検索で Wox AI が顔文字を追加提案します。照合に使う AI モデルは下で選択してください。"
     },
     "zh_CN": {
       "plugin_name": "颜文字",
@@ -57,6 +75,11 @@
       "action_copy_image": "复制为图片",
       "action_save": "保存文本文件到桌面",
       "action_save_image": "保存 PNG 到桌面",
+      "ai_failed": "AI 匹配失败",
+      "ai_group": "AI",
+      "ai_matching": "AI 匹配中…",
+      "ai_matching_subtitle": "正在向 Wox AI 请求更多颜文字",
+      "ai_no_result": "AI 没有找到匹配",
       "error_image_failed": "生成图片失败：%s",
       "error_save_failed": "保存文件失败：%s",
       "notify_copied": "颜文字已复制到剪贴板",
@@ -67,15 +90,46 @@
       "preview_label_category": "分类",
       "preview_label_source": "来源",
       "preview_label_tag": "标签",
-      "preview_label_description": "描述"
+      "preview_label_description": "描述",
+      "setting_ai_label": "AI 匹配",
+      "setting_ai_model_label": "AI 模型",
+      "setting_ai_model_tooltip": "用于颜文字匹配的模型，请在 Wox 的 AI 设置中配置提供商。",
+      "setting_ai_tooltip": "启用后，搜索 2 个以上字符时由 Wox AI 补充推荐颜文字。请在下方选择用于匹配的 AI 模型。"
     }
   },
   "Features": [
+    {
+      "Name": "ai"
+    },
     {
       "Name": "mru",
       "Params": {
         "HashBy": "identityKey"
       }
+    }
+  ],
+  "SettingDefinitions": [
+    {
+      "Type": "checkbox",
+      "Value": {
+        "Key": "aiEnabled",
+        "Label": "i18n:setting_ai_label",
+        "DefaultValue": "false",
+        "Tooltip": "i18n:setting_ai_tooltip"
+      },
+      "DisabledInPlatforms": [],
+      "IsPlatformSpecific": false
+    },
+    {
+      "Type": "selectAIModel",
+      "Value": {
+        "Key": "aiModel",
+        "Label": "i18n:setting_ai_model_label",
+        "DefaultValue": "",
+        "Tooltip": "i18n:setting_ai_model_tooltip"
+      },
+      "DisabledInPlatforms": [],
+      "IsPlatformSpecific": false
     }
   ]
 }

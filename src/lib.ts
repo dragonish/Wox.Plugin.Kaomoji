@@ -7,7 +7,7 @@ import dataJson from "./data.json"
  */
 export interface KaomojiEntry {
   text: string
-  sources: Array<"kaomoji" | "emoticon">
+  sources: Array<"kaomoji" | "emoticon" | "ai">
   category: string
   name?: string
   description?: string
@@ -318,4 +318,10 @@ export function textHash(text: string): string {
     hash = Math.imul(hash, 0x01000193)
   }
   return (hash >>> 0).toString(16)
+}
+
+/** Build a synthetic entry for an AI-generated kaomoji outside the catalog. */
+export function aiEntry(text: string, category: string | undefined): KaomojiEntry {
+  const cat = category && category.trim() ? category.trim() : "ai"
+  return { text, sources: ["ai"], category: cat, tags: [] }
 }

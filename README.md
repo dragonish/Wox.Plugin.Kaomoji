@@ -18,10 +18,12 @@ leaving the launcher.
   file to the desktop.
 - **Recent picks** — previously used kaomoji are restored through Wox's MRU
   support, so favourites come back quickly.
+- **AI suggestions (optional)** — with Wox's built-in AI enabled, searches of
+  two or more characters can ask the selected Wox AI model for extra kaomoji.
 - **Localized UI** — English, Simplified Chinese and Japanese, with
   per-character font fallback for kaomoji that mix kana, CJK, braille, symbols
   and emoji.
-- **Cross-platform** — Windows, Linux and macOS on Wox 2.4.5 or newer.
+- **Cross-platform** — Windows, Linux and macOS on Wox 2.4.8 or newer.
 
 ## Screenshot
 
@@ -53,6 +55,13 @@ choose another one:
 Saved files are named after the kaomoji itself (unsafe filename characters are
 removed) plus a timestamp, and fall back to the home directory when no desktop
 folder exists.
+
+## AI matching
+
+Wox can ask its built-in AI model for extra kaomoji when the local catalogue is
+not enough. Open Wox settings → Plugins → Kaomoji, enable **AI matching**, and
+pick the model to use. Local results are shown immediately; AI suggestions
+arrive afterwards in their own **AI** group.
 
 ## Search syntax
 
