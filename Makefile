@@ -40,7 +40,7 @@ install: check-init
 
 reinstall: check-init
 ifeq ($(OS),Windows_NT)
-	$(POWERSHELL) "foreach ($$path in @('$(DIST_DIR)', 'node_modules')) { if (Test-Path $$path) { Remove-Item -Recurse -Force $$path } }"
+	$(POWERSHELL) "if (Test-Path '$(DIST_DIR)') { Remove-Item -Recurse -Force '$(DIST_DIR)' }; if (Test-Path 'node_modules') { Remove-Item -Recurse -Force 'node_modules' }"
 else
 	rm -rf $(DIST_DIR) ./node_modules
 endif
