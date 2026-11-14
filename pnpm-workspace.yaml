@@ -1,2 +1,6 @@
+# The Wox plugin SDK is a first-party package that this template is meant to track
+# closely, so it is exempt from the default minimum release age (24h) gate.
+# Exempting by package name keeps this file stable across SDK bumps. Listing
+# specific versions makes pnpm append a new `|| <version>` on every update.
 minimumReleaseAgeExclude:
-  - '@wox-launcher/wox-plugin@0.0.133 || 0.0.144 || 0.0.152'
+  - '@wox-launcher/wox-plugin'
