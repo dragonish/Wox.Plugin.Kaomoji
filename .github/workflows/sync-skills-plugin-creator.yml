@@ -22,23 +22,21 @@ jobs:
           repository: Wox-launcher/Wox
           path: _wox_upstream
           sparse-checkout: |
-            wox.core/resource/ai/skills/wox-plugin-creator
+            .agents/skills/wox-plugin-creator
           sparse-checkout-cone-mode: false
 
       - name: Sync skill files
         id: sync
         run: |
-          SOURCE="_wox_upstream/wox.core/resource/ai/skills/wox-plugin-creator"
+          SOURCE="_wox_upstream/.agents/skills/wox-plugin-creator"
           TARGET=".agents/skills/wox-plugin-creator"
 
           if [ ! -d "$SOURCE" ]; then
-            echo "Source directory not found, skipping"
-            echo "synced=false" >> "$GITHUB_OUTPUT"
-            exit 0
+            echo "::error::Upstream skill directory not found: $SOURCE"
+            exit 1
           fi
 
           echo "sha=$(git -C _wox_upstream rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
-          echo "synced=true" >> "$GITHUB_OUTPUT"
 
           rm -rf "$TARGET"
           mkdir -p "$(dirname "$TARGET")"
@@ -47,7 +45,6 @@ jobs:
           rm -rf _wox_upstream
 
       - name: Check for changes
-        if: steps.sync.outputs.synced == 'true'
         id: changes
         run: |
           git add -A .agents/skills/wox-plugin-creator
@@ -58,14 +55,14 @@ jobs:
           fi
 
       - name: Create Pull Request
-        if: steps.sync.outputs.synced == 'true' && steps.changes.outputs.changed == 'true'
+        if: steps.changes.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: sync wox-plugin-creator skill from upstream"
           title: "chore: sync wox-plugin-creator skill from Wox upstream"
           body: |
-            Auto-sync `wox-plugin-creator` skill from [Wox-launcher/Wox](https://github.com/Wox-launcher/Wox/tree/master/wox.core/resource/ai/skills/wox-plugin-creator).
+            Auto-sync `wox-plugin-creator` skill from [Wox-launcher/Wox](https://github.com/Wox-launcher/Wox/tree/master/.agents/skills/wox-plugin-creator).
 
             Upstream commit: `${{ steps.sync.outputs.sha }}`
 
