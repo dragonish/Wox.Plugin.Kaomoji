@@ -32,13 +32,11 @@ jobs:
           TARGET=".agents/skills/wox-plugin-submit2store"
 
           if [ ! -d "$SOURCE" ]; then
-            echo "Source directory not found, skipping"
-            echo "synced=false" >> "$GITHUB_OUTPUT"
-            exit 0
+            echo "::error::Upstream skill directory not found: $SOURCE"
+            exit 1
           fi
 
           echo "sha=$(git -C _wox_upstream rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
-          echo "synced=true" >> "$GITHUB_OUTPUT"
 
           rm -rf "$TARGET"
           mkdir -p "$(dirname "$TARGET")"
@@ -47,7 +45,6 @@ jobs:
           rm -rf _wox_upstream
 
       - name: Check for changes
-        if: steps.sync.outputs.synced == 'true'
         id: changes
         run: |
           git add -A .agents/skills/wox-plugin-submit2store
@@ -58,7 +55,7 @@ jobs:
           fi
 
       - name: Create Pull Request
-        if: steps.sync.outputs.synced == 'true' && steps.changes.outputs.changed == 'true'
+        if: steps.changes.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
