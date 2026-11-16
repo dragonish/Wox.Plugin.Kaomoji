@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout this repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Checkout Wox repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: Wox-launcher/Wox
           path: _wox_upstream
@@ -26,36 +26,39 @@ jobs:
           sparse-checkout-cone-mode: false
 
       - name: Sync skill files
+        id: sync
         run: |
           SOURCE="_wox_upstream/wox.core/resource/ai/skills/wox-plugin-creator"
           TARGET=".agents/skills/wox-plugin-creator"
 
           if [ ! -d "$SOURCE" ]; then
             echo "Source directory not found, skipping"
+            echo "synced=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          # Remove old files and copy new ones
+          echo "sha=$(git -C _wox_upstream rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+          echo "synced=true" >> "$GITHUB_OUTPUT"
+
           rm -rf "$TARGET"
+          mkdir -p "$(dirname "$TARGET")"
           cp -r "$SOURCE" "$TARGET"
 
-          # Clean up
           rm -rf _wox_upstream
 
       - name: Check for changes
+        if: steps.sync.outputs.synced == 'true'
         id: changes
         run: |
-          git diff --quiet .agents/skills/wox-plugin-creator/ && echo "changed=false" >> "$GITHUB_OUTPUT" || echo "changed=true" >> "$GITHUB_OUTPUT"
-
-      - name: Get upstream commit info
-        if: steps.changes.outputs.changed == 'true'
-        id: commit_info
-        run: |
-          cd _wox_upstream 2>/dev/null || true
-          echo "date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+          git add -A .agents/skills/wox-plugin-creator
+          if git diff --cached --quiet -- .agents/skills/wox-plugin-creator; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Create Pull Request
-        if: steps.changes.outputs.changed == 'true'
+        if: steps.sync.outputs.synced == 'true' && steps.changes.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -64,7 +67,8 @@ jobs:
           body: |
             Auto-sync `wox-plugin-creator` skill from [Wox-launcher/Wox](https://github.com/Wox-launcher/Wox/tree/master/wox.core/resource/ai/skills/wox-plugin-creator).
 
+            Upstream commit: `${{ steps.sync.outputs.sha }}`
+
             This PR is automatically created by GitHub Action.
           branch: auto/sync-wox-plugin-creator-skill
           delete-branch: true
-          labels: automated
